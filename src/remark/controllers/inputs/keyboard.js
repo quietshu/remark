@@ -1,16 +1,25 @@
-exports.register = function (events) {
-  addKeyboardEventListeners(events);
+exports.register = function (events, options) {
+  addKeyboardEventListeners(events, options);
 };
 
 exports.unregister = function (events) {
   removeKeyboardEventListeners(events);
 };
 
-function addKeyboardEventListeners (events) {
+function addKeyboardEventListeners (events, options) {  
   events.on('keydown', function (event) {
     if (event.metaKey || event.ctrlKey) {
       // Bail out if meta or ctrl key was pressed
       return;
+    }
+    
+    if (options.keyFocusEscapeElement) {
+      // Bail out if focusing on escaped elements
+      if ([].some.call(event.path, function (el) {
+        return el.classList.indexOf(options.keyFocusEscapeElement) > -1;
+      })) {
+        return;
+      }
     }
 
     switch (event.keyCode) {
@@ -41,6 +50,15 @@ function addKeyboardEventListeners (events) {
     if (event.metaKey || event.ctrlKey) {
       // Bail out if meta or ctrl key was pressed
       return;
+    }
+
+    if (options.keyFocusEscapeElement) {
+      // Bail out if focusing on escaped elements
+      if ([].some.call(event.path, function (el) {
+        return el.classList.indexOf(options.keyFocusEscapeElement) > -1;
+      })) {
+        return;
+      }
     }
 
     switch (String.fromCharCode(event.which)) {
