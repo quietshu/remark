@@ -15,7 +15,7 @@ function Controller (events, dom, slideshowView, options) {
 
   message.register(events);
   location.register(events, dom, slideshowView);
-  keyboard.register(events);
+  keyboard.register(events, options);
   mouse.register(events, options);
   touch.register(events, options);
 
