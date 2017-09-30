@@ -16,7 +16,7 @@ function addKeyboardEventListeners (events, options) {
     if (options.keyFocusEscapeElement) {
       // Bail out if focusing on escaped elements
       if ([].some.call(event.path, function (el) {
-        return [].indexOf.call(el.classList, options.keyFocusEscapeElement) > -1;
+        return [].indexOf.call(el.classList || [], options.keyFocusEscapeElement) > -1;
       })) {
         return;
       }
@@ -55,7 +55,7 @@ function addKeyboardEventListeners (events, options) {
     if (options.keyFocusEscapeElement) {
       // Bail out if focusing on escaped elements
       if ([].some.call(event.path, function (el) {
-        return [].indexOf.call(el.classList, options.keyFocusEscapeElement) > -1;
+        return [].indexOf.call(el.classList || [], options.keyFocusEscapeElement) > -1;
       })) {
         return;
       }
